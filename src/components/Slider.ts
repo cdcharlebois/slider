@@ -36,6 +36,7 @@ interface SliderProps {
     style?: object;
     tooltipText?: string | null;
     value: number | null;
+	vertical: boolean;
 }
 
 type BootstrapStyle = "primary" | "inverse" | "success" | "info" | "warning" | "danger";
@@ -44,7 +45,8 @@ class Slider extends Component<SliderProps, {}> {
     static defaultProps: SliderProps = {
         bootstrapStyle: "info",
         disabled: false,
-        value: 0
+        value: 0,
+		vertical: false
     };
 
     render() {
@@ -70,7 +72,8 @@ class Slider extends Component<SliderProps, {}> {
                 onAfterChange: this.props.onChange,
                 onChange: this.props.onUpdate,
                 step: this.props.stepValue,
-                value: this.getValidValue()
+                value: this.getValidValue(),
+				vertical: this.props.vertical
             }),
             createElement(Alert, { message: alertMessage })
         );

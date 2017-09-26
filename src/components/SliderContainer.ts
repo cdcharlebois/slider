@@ -2,6 +2,8 @@ import { Component, createElement } from "react";
 
 import { BootstrapStyle, Slider } from "./Slider";
 
+import * as ReactDOM from 'react-dom';
+
 interface WrapperProps {
     class: string;
     mxObject?: mendix.lib.MxObject;
@@ -21,6 +23,7 @@ interface SliderContainerProps extends WrapperProps {
     stepAttribute: string;
     tooltipText: string;
     valueAttribute: string;
+	vertical: boolean;
 }
 
 interface SliderContainerState {
@@ -64,7 +67,8 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             stepValue: this.state.stepValue,
             style: SliderContainer.parseStyle(this.props.style),
             tooltipText: this.props.tooltipText,
-            value: this.state.value
+            value: this.state.value,
+            vertical: this.props.vertical
         });
     }
 
@@ -76,6 +80,15 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     componentWillUnmount() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
+
+	componentDidMount() {
+		if(this.props.vertical) {
+			const node = ReactDOM.findDOMNode(this)
+				if (node !== null) {
+				(<HTMLScriptElement>node.parentNode).style.height = "100%";
+			}
+		}
+	}
 
     public static parseStyle(style = ""): {[key: string]: string} {
         try {

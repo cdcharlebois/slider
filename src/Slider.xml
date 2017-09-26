@@ -85,5 +85,10 @@
                 <enumerationValue key="danger">Danger</enumerationValue>
             </enumerationValues>
         </property>
+		<property key="vertical" type="boolean" defaultValue="false">
+            <caption>Vertical</caption>
+            <category>Appearance</category>
+            <description>Whether the widget renders vertically or horizontally (default/false is horizontal)</description>
+        </property>		
     </properties>
 </widget>

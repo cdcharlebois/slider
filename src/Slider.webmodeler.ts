@@ -22,7 +22,8 @@ export class preview extends Component<SliderContainerProps, {}> {
             stepValue: props.stepValue <= 0 ? 10 : props.stepValue,
             style: SliderContainer.parseStyle(props.style),
             tooltipText: props.tooltipText,
-            value: 50
+            value: 50,
+			vertical: false
         };
     }
 }

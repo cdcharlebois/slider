@@ -16,6 +16,7 @@ describe("Slider", () => {
     const noOfMarkers = 0;
     const marks: Marks = { 0: "0", 25: "25", 50: "50", 75: "75", 100: "100" };
     const bootstrapStyle = "primary";
+	const vertical = false;
 
     beforeEach(() => {
         sliderProps = {
@@ -26,7 +27,8 @@ describe("Slider", () => {
             noOfMarkers,
             stepValue,
             tooltipText: "{1}",
-            value
+            value,
+			vertical
         };
     });
     const renderSlider = (props: SliderProps) => shallow(createElement(Slider, props));
@@ -44,7 +46,7 @@ describe("Slider", () => {
                     min: minValue,
                     step: stepValue,
                     value,
-                    vertical: false
+                    vertical: vertical
                 }), createElement(Alert, { message: "" })
             )
         );
