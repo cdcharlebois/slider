@@ -125,10 +125,11 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             }
             if (!stepValue || stepValue <= 0) {
                 message.push(`Step value ${stepValue} should be greater than 0`);
-            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
-                message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
-             should be evenly divisible by the step value ${stepValue}`);
             }
+            // } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
+            //     message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
+            //  should be evenly divisible by the step value ${stepValue}`);
+            // }
         }
 
         return message.join(", ");

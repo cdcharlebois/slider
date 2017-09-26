@@ -81,15 +81,17 @@ class Slider extends Component<SliderProps, {}> {
 
     private calculateMarks(): Marks {
         const marks: Marks = {};
-        const { noOfMarkers, maxValue, minValue } = this.props;
-        if ((noOfMarkers || noOfMarkers === 0) && (maxValue || maxValue === 0) && (minValue || minValue === 0)) {
-            if (this.isValidMinMax() && noOfMarkers >= 2) {
-                const interval = (maxValue - minValue) / (noOfMarkers - 1);
-                for (let i = 0; i < noOfMarkers; i++) {
-                    const value = parseFloat((minValue + (i * interval)).toFixed(this.props.decimalPlaces));
-                    marks[value] = value.toString();
-                }
+        const { maxValue, minValue } = this.props;
+        var myMax = maxValue || 0,
+            myStep = this.props.stepValue || 1;
+
+        if (this.isValidMinMax()) {
+            for (var index = minValue || 0; index < myMax; index += myStep) {
+                var indexString = parseFloat(index.toFixed(this.props.decimalPlaces));
+                marks[indexString] = indexString.toString();
             }
+            var myMaxString = parseFloat(myMax.toFixed(this.props.decimalPlaces));
+            marks[myMaxString] = myMaxString.toString();
         }
 
         return marks;
