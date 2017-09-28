@@ -23,7 +23,8 @@ interface SliderContainerProps extends WrapperProps {
     stepAttribute: string;
     tooltipText: string;
     valueAttribute: string;
-	vertical: boolean;
+    vertical: boolean;
+    disabled: boolean;
 }
 
 interface SliderContainerState {
@@ -58,7 +59,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             bootstrapStyle: this.props.bootstrapStyle,
             className: this.props.class,
             decimalPlaces: this.props.decimalPlaces,
-            disabled,
+            disabled: this.props.disabled,
             maxValue: this.state.maximumValue,
             minValue: this.state.minimumValue,
             noOfMarkers: this.props.noOfMarkers,

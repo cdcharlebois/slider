@@ -90,5 +90,10 @@
             <category>Appearance</category>
             <description>Whether the widget renders vertically or horizontally (default/false is horizontal)</description>
         </property>		
+        <property key="disabled" type="boolean" required="true" defaultValue="false">
+            <caption>Disabled?</caption>
+            <category>Appearance</category>
+            <description></description>
+        </property>
     </properties>
 </widget>
