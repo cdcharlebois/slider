@@ -121,8 +121,8 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             message.push("Minimum value is required");
         }
         if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue >= maximumValue)) {
-                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
+            if (validMin && validMax && (minimumValue > maximumValue)) {
+                message.push(`Minimum value ${minimumValue} should be less than or equal to the maximum value ${maximumValue}`);
             }
             if (!stepValue || stepValue <= 0) {
                 message.push(`Step value ${stepValue} should be greater than 0`);
@@ -201,15 +201,31 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         }
     }
 
+    /**
+     * @description This method is called to validate the values of a disabled slider.
+     * @private
+     * @returns {string} 
+     * @memberof SliderContainer
+      */
     private validateValues(): string {
         const message: string[] = [];
         const { minimumValue, maximumValue, value } = this.state;
         if (typeof minimumValue === "number" && typeof maximumValue === "number" && typeof value === "number") {
             if (value > maximumValue) {
-                message.push(`Value ${value} should be less than the maximum ${maximumValue}`);
+                // reset the state
+                this.setState({
+                    value: maximumValue
+                });
+                console.debug(`value ${value} is greater than the maximum allowed. Resetting to ${maximumValue} (Max)`);
+                // message.push(`Value ${value} should be less than the maximum ${maximumValue}`);
             }
             if (value < minimumValue) {
-                message.push(`Value ${value} should be greater than the minimum ${minimumValue}`);
+                // reset the state
+                this.setState({
+                    value: minimumValue
+                });
+                console.debug(`value ${value} is less than the minimum allowed. Resetting to ${minimumValue} (Max)`);
+                // message.push(`Value ${value} should be greater than the minimum ${minimumValue}`);
             }
         }
 
