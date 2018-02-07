@@ -150,8 +150,9 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     private onUpdate(value: number) {
         const { mxObject, valueAttribute } = this.props;
         const { maximumValue } = this.state;
+        const stepValue = this.state.stepValue || 1;
         if ((value || value === 0) && mxObject) {
-            if ((maximumValue || maximumValue === 0) && (value > maximumValue)) {
+            if ((maximumValue || maximumValue === 0) && stepValue * Math.round(maximumValue / stepValue) === stepValue * Math.round(value / stepValue)) {
                 mxObject.set(valueAttribute, maximumValue);
             } else {
                 mxObject.set(valueAttribute, value);
@@ -159,7 +160,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         }
     }
 
-    private handleAction(value: number) {
+    private handleAction(value: number) { 
         if ((value || value === 0) && this.props.mxObject) {
             this.executeMicroflow(this.props.onChangeMicroflow, this.props.mxObject.getGuid());
         }
